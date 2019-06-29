@@ -13,6 +13,11 @@ os.system("kubectl apply -f yaml_files/ingress-nginx_service.yaml")
 namespace_list = ["staging", "production"]
 fileListToApply = ["redis-master-deployment.yaml","redis-master-service.yaml","redis-slave-deployment.yaml","redis-slave-service.yaml","frontend-deployment.yaml","frontend-service_nginx.yaml"]
 
+# Create Namespace
+for namespace in namespace_list:
+    cmd= "kubectl create namespace " + namespace
+    os.system(cmd)
+    
 for namespace in namespace_list:
     print(namespace)
     # Creating deployment and Service
@@ -21,6 +26,6 @@ for namespace in namespace_list:
         print(cmd)
         os.system(cmd)
 
-    # Expose application on desired hostname
-    os.system("kubectl create -f yaml_files/ingress_staging_guestbook_routing.yaml -n staging")
-    os.system("kubectl create -f yaml_files/ingress_production_guestbook_routing.yaml -n production")
+# Expose application on desired hostname
+os.system("kubectl create -f yaml_files/ingress_staging_guestbook_routing.yaml -n staging")
+os.system("kubectl create -f yaml_files/ingress_production_guestbook_routing.yaml -n production")
