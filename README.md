@@ -1,10 +1,50 @@
-1. Instructions to evaluate level-1 assignment
-	1. Refer: level1/mStakx-K8s-Level1-Test_documentation.pdf
-	   file contains executed steps and evidence for each step given in assignment	
-	2. Refer "yaml_files" folder. It has all yaml files used
-	3. Added load_generator.sh and automation.py
 
+
+0. Generic instruction
+- prerequisite : kubernetes cluster up and running
+- git clone https://github.com/archit1012/test
+- Skipped steps
+  - Automation script to create k8s cluster on "Google Compute Engine"
+  - CI/CD - Jenkins part
+
+
+1. Instructions to evaluate level-1 assignment
+	1. $ cd level1/
+	2. $ python automation.py
+	   - Deploys guestbook application in staging and production namespace
+	   - Deploys nginx ingress controller and creates routes
+
+    3. configure /etc/host file 
+       add below entry
+       <IP> guestbook.mstakx.io
+       <IP> staging-guestbook.mstakx.io
+
+    4. Testing Autoscaller
+       $ sh load_generator.sh
+       It sends get request in infinite loop and after couple of minutes one can see new pod getting created
+
+	5. Refer: level1/mStakx-K8s-Level1-Test_documentation.pdf
+	   file contains executed steps and evidence for each step given in assignment	
+	
 2. Instructions to evaluate level-2 assignment
+	1. $ cd level2/
+	2. $ python automation2.py
+		- Deploys Helm, guestbook application, promethues, grafana and EFK stack
+	3. Exposing NodePort
+	   - Get all running services
+	     $ kubectl get svc --all-namespaces | grep -i nodeport
+	   - Create rule in firewall for google cloud
+	     $ gcloud compute firewall-rules create <name Of service> --allow tcp:<NodePort of Service>
+	4. Accessing grafana and Kiabana
+	   <IP of Master Node>:<NodePort>
+
+	5. Creating visualization for grafana
+	   - Add datasource for grafana : http://prometheus-service.monitoring:8080/
+	   - Create visualizing by adding json file "level2/yaml_files/grafana/grafana_dashboard_json_model_k8s_pod_matrics.json" 
+    
+    6. Creating visualization for Kiabana
+       - Create index "logstash*" and add @timestamp as filter
+
 	1. Refer: level2/mStakx-K8s-Level2-Test_documentation.pdf
-	   Few of the steps are skipped and for others I have added evidence
+	   file contains executed steps and evidence for each step given in assignment	
 	
