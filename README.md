@@ -17,14 +17,13 @@
 	   - Deploys guestbook application in staging and production namespace
 	   - Deploys nginx ingress controller and creates routes
 
-    3. configure /etc/host file 
-       add below entry
-       - <IP> guestbook.mstakx.io
-       - <IP> staging-guestbook.mstakx.io
+    3. configure /etc/host file add below entry
+       - IP guestbook.mstakx.io
+       - IP staging-guestbook.mstakx.io
 
     4. Testing Autoscaller
        - $ sh load_generator.sh
-         It sends get request in infinite loop and after couple of minutes one can see new pod getting created
+       - It sends get request in infinite loop and after couple of minutes one can see new pod getting created
 
 	5. Refer: level1/mStakx-K8s-Level1-Test_documentation.pdf
 	   - file contains executed steps and evidence for each step given in assignment	
@@ -40,7 +39,7 @@
 	     - $ gcloud compute firewall-rules create <name Of service> --allow tcp:<NodePort of Service>
 
 	4. Accessing grafana and Kiabana
-	   - <IP of Master Node>:<NodePort>
+	   - IP of Master Node:NodePort
 
 	5. Creating visualization for grafana
 	   - Add datasource for grafana : http://prometheus-service.monitoring:8080/
