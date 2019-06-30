@@ -5,7 +5,7 @@
 
 import os
 
-# # Helm installation
+# Helm installation
 os.system("curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash")
 os.system("kubectl --namespace kube-system create sa tiller")
 os.system("kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount=kube-system:tiller")
@@ -24,12 +24,12 @@ for namespace in application_namespace_list:
     print(namespace)
     # Creating deployment and Service
     for fileName in fileListToApply:
-        cmd= "kubectl create -f guestbook/" + fileName + " -n " + namespace
+        cmd= "kubectl create -f yaml_files/guestbook/" + fileName + " -n " + namespace
         print(cmd)
         os.system(cmd)
  
  
-# # Create monitoring namespace for monitoring tools deployment
+# Create monitoring namespace for monitoring tools deployment
 os.system("kubectl create namespace monitoring")
   
 # Deploy Prometheus
@@ -40,11 +40,26 @@ for namespace in application_namespace_list:
     print(namespace)
     # Creating deployment and Service
     for fileName in fileListToApply:
-        cmd= "kubectl create -f prometheus/" + fileName + " -n " + namespace
+        cmd= "kubectl create -f yaml_files/prometheus/" + fileName + " -n " + namespace
         print(cmd)
         os.system(cmd)
  
 # Deploy grafana
-cmd = "helm install -f grafana/grafana_values.yaml stable/grafana -n monitoring" 
+cmd = "helm install -f yaml_files/grafana/grafana_values.yaml stable/grafana -n monitoring" 
 os.system(cmd)
+ 
+
+# Deploy EFK
+os.system("kubectl create namespace logging")
+
+application_namespace_list = ["logging"] 
+fileListToApply = ["elastic.yaml","kibana.yaml","fluentd-rbac.yaml","fluentd-daemonset.yaml","fluentd-service.yaml"]
+ 
+for namespace in application_namespace_list:
+    print(namespace)
+    # Creating deployment and Service
+    for fileName in fileListToApply:
+        cmd= "kubectl create -f yaml_files/efk-kubernetes/" + fileName + " -n " + namespace
+        print(cmd)
+        os.system(cmd)
  
