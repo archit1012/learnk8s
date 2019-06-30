@@ -1,11 +1,14 @@
-
-
 0. Generic instruction
-- prerequisite : kubernetes cluster up and running
-- git clone https://github.com/archit1012/test
-- Skipped steps
+- Skipped part
   - Automation script to create k8s cluster on "Google Compute Engine"
   - CI/CD - Jenkins part
+  - Blue/Green and Canary Upgrade
+  - Default "guestbook" application does not have prometheus metrics and logs to view on kibana, currently only showing cluster logs only
+
+- prerequisite
+  - kubernetes cluster up and running
+  - Connectivity to download packages
+  - clone test repository : git clone https://github.com/archit1012/test
 
 
 1. Instructions to evaluate level-1 assignment
@@ -44,7 +47,5 @@
     
     6. Creating visualization for Kiabana
        - Create index "logstash*" and add @timestamp as filter
-
-	1. Refer: level2/mStakx-K8s-Level2-Test_documentation.pdf
+	7. Refer: level2/mStakx-K8s-Level2-Test_documentation.pdf
 	   file contains executed steps and evidence for each step given in assignment	
-	
