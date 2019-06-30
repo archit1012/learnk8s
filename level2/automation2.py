@@ -13,8 +13,10 @@ os.system("helm init --service-account tiller")
 os.system("helm repo update")
 os.system("kubectl get deploy,svc tiller-deploy -n kube-system")
  
-# create development namespace for application deployment 
-os.system("kubectl create namespace development")
+# create development namespace for application deployment
+cmd="kubectl create namespace development"
+print(cmd) 
+os.system(cmd)
  
 # Deploy guest-bok application in development namespace
 application_namespace_list = ["development"]
@@ -30,7 +32,9 @@ for namespace in application_namespace_list:
  
  
 # Create monitoring namespace for monitoring tools deployment
-os.system("kubectl create namespace monitoring")
+cmd="kubectl create namespace monitoring"
+print(cmd)
+os.system(cmd)
   
 # Deploy Prometheus
 application_namespace_list = ["monitoring"]
@@ -45,15 +49,23 @@ for namespace in application_namespace_list:
         os.system(cmd)
  
 # Deploy grafana
-cmd = "helm install -f yaml_files/grafana/grafana_values.yaml stable/grafana -n monitoring" 
+cmd = "helm install -f yaml_files/grafana/grafana_values.yaml stable/grafana -n monitoring"
+print(cmd)
 os.system(cmd)
  
 
 # Deploy EFK
-os.system("kubectl create namespace logging")
+cmd= "kubectl create -f yaml_files/efk-kubernetes/fluentd-rbac.yaml"
+print(cmd)
+os.system(cmd)
 
+cmd= "kubectl create -f yaml_files/efk-kubernetes/fluentd-daemonset.yaml" 
+print(cmd)
+os.system(cmd)
+
+os.system("kubectl create namespace logging")
 application_namespace_list = ["logging"] 
-fileListToApply = ["elastic.yaml","kibana.yaml","fluentd-rbac.yaml","fluentd-daemonset.yaml","fluentd-service.yaml"]
+fileListToApply = ["elastic.yaml","kibana.yaml","fluentd-service.yaml"]
  
 for namespace in application_namespace_list:
     print(namespace)
@@ -62,4 +74,20 @@ for namespace in application_namespace_list:
         cmd= "kubectl create -f yaml_files/efk-kubernetes/" + fileName + " -n " + namespace
         print(cmd)
         os.system(cmd)
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
  
