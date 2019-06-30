@@ -19,15 +19,15 @@
 
     3. configure /etc/host file 
        add below entry
-       <IP> guestbook.mstakx.io
-       <IP> staging-guestbook.mstakx.io
+       - <IP> guestbook.mstakx.io
+       - <IP> staging-guestbook.mstakx.io
 
     4. Testing Autoscaller
-       $ sh load_generator.sh
-       It sends get request in infinite loop and after couple of minutes one can see new pod getting created
+       - $ sh load_generator.sh
+         It sends get request in infinite loop and after couple of minutes one can see new pod getting created
 
 	5. Refer: level1/mStakx-K8s-Level1-Test_documentation.pdf
-	   file contains executed steps and evidence for each step given in assignment	
+	   - file contains executed steps and evidence for each step given in assignment	
 	
 2. Instructions to evaluate level-2 assignment
 	1. $ cd level2/
@@ -35,11 +35,12 @@
 		- Deploys Helm, guestbook application, promethues, grafana and EFK stack
 	3. Exposing NodePort
 	   - Get all running services
-	     $ kubectl get svc --all-namespaces | grep -i nodeport
+	     - $ kubectl get svc --all-namespaces | grep -i nodeport
 	   - Create rule in firewall for google cloud
-	     $ gcloud compute firewall-rules create <name Of service> --allow tcp:<NodePort of Service>
+	     - $ gcloud compute firewall-rules create <name Of service> --allow tcp:<NodePort of Service>
+
 	4. Accessing grafana and Kiabana
-	   <IP of Master Node>:<NodePort>
+	   - <IP of Master Node>:<NodePort>
 
 	5. Creating visualization for grafana
 	   - Add datasource for grafana : http://prometheus-service.monitoring:8080/
@@ -48,4 +49,4 @@
     6. Creating visualization for Kiabana
        - Create index "logstash*" and add @timestamp as filter
 	7. Refer: level2/mStakx-K8s-Level2-Test_documentation.pdf
-	   file contains executed steps and evidence for each step given in assignment	
+	   - file contains executed steps and evidence for each step given in assignment	
