@@ -1,9 +1,3 @@
-0. Generic instruction
-- Skipped part
-  - Automation script to create k8s cluster on "Google Compute Engine"
-  - CI/CD - Jenkins part
-  - Blue/Green and Canary Upgrade
-  - Default "guestbook" application does not have prometheus metrics and logs to view on kibana, currently only showing cluster logs only
 
 - prerequisite
   - kubernetes cluster up and running
@@ -11,24 +5,24 @@
   - clone test repository : git clone https://github.com/archit1012/test
 
 
-1. Instructions to evaluate level-1 assignment
+1. Instructions
 	1. $ cd level1/
 	2. $ python automation.py
 	   - Deploys guestbook application in staging and production namespace
 	   - Deploys nginx ingress controller and creates routes
 
     3. configure /etc/host file add below entry
-       - IP guestbook.mstakx.io
-       - IP staging-guestbook.mstakx.io
+       - IP guestbook.testweb.io
+       - IP staging-guestbook.testweb.io
 
     4. Testing Autoscaller
        - $ sh load_generator.sh
        - It sends get request in infinite loop and after couple of minutes one can see new pod getting created
 
-	5. Refer: level1/mStakx-K8s-Level1-Test_documentation.pdf
+	5. Refer: level1/Test_documentation.pdf
 	   - file contains executed steps and evidence for each step given in assignment	
 	
-2. Instructions to evaluate level-2 assignment
+2. Instructions 
 	1. $ cd level2/
 	2. $ python automation2.py
 		- Deploys Helm, guestbook application, promethues, grafana and EFK stack
@@ -47,5 +41,5 @@
     
     6. Creating visualization for Kiabana
        - Create index "logstash*" and add @timestamp as filter
-	7. Refer: level2/mStakx-K8s-Level2-Test_documentation.pdf
+	7. Refer: level2/Level2-Test_documentation.pdf
 	   - file contains executed steps and evidence for each step given in assignment	
